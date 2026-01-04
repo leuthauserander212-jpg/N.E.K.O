@@ -1,8 +1,7 @@
 /**
  * Live2D Model - 模型加载、口型同步相关功能
+ * 依赖: live2d-core.js (提供 Live2DManager 类和 window.LIPSYNC_PARAMS)
  */
-
-import { LIPSYNC_PARAMS } from './live2d-constants.js';
 
 // 加载模型
 Live2DManager.prototype.loadModel = async function(modelPath, options = {}) {
@@ -362,7 +361,7 @@ Live2DManager.prototype.installMouthOverride = function() {
     }
 
     // 口型参数列表（这些参数不会被常驻表情覆盖）- 使用文件顶部定义的 LIPSYNC_PARAMS 常量
-    const lipSyncParams = LIPSYNC_PARAMS;
+    const lipSyncParams = window.LIPSYNC_PARAMS;
     const visibilityParams = ['ParamOpacity', 'ParamVisibility'];
     
     // 缓存参数索引，避免每帧查询
@@ -514,7 +513,7 @@ Live2DManager.prototype.installMouthOverride = function() {
                     const params = this.persistentExpressionParamsByName[name];
                     if (Array.isArray(params)) {
                         for (const p of params) {
-                            if (LIPSYNC_PARAMS.includes(p.Id)) continue;
+                            if (window.LIPSYNC_PARAMS.includes(p.Id)) continue;
                             try {
                                 coreModel.setParameterValueById(p.Id, p.Value);
                             } catch (_) {}
