@@ -24,7 +24,7 @@ logger, log_config = setup_logging(service_name="Monitor", log_level=logging.INF
 
 # 获取资源路径（支持打包后的环境）
 def get_resource_path(relative_path):
-    """获取资源的绝对路径，支持开发环境和打包后的环境"""
+    
     if getattr(sys, 'frozen', False):
         # 打包后的环境
         if hasattr(sys, '_MEIPASS'):
